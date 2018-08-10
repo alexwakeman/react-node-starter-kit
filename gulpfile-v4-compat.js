@@ -1,14 +1,14 @@
-let gulp = require('gulp');
-let sass = require('gulp-sass');
-let browserify = require('browserify');
-let source = require('vinyl-source-stream');
-let karma = require('karma');
-let gutil = require('gutil');
-let react = require('gulp-react');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const karma = require('karma');
+const gutil = require('gutil');
+const react = require('gulp-react');
 
-let libs = ['react', 'react-dom', 'redux', 'react-redux'];
+const libs = ['react', 'react-dom', 'redux', 'react-redux'];
 
-gulp.task('app', function () {
+function appTask(cb) {
     let bundler = browserify({entries: './src/js/bootstrap.jsx', extensions: ['.jsx'], debug: true});
 
     libs.forEach(function(lib) {
@@ -20,9 +20,10 @@ gulp.task('app', function () {
         .on('error', gutil.log)
         .pipe(source('app.js'))
         .pipe(gulp.dest('dist/js'));
-});
+    cb();
+}
 
-gulp.task('libs', function () {
+function libsTask(cb) {
     let bundler = browserify({
         debug: false
     });
@@ -37,32 +38,33 @@ gulp.task('libs', function () {
         // .pipe(uglify())
         .on('error', gutil.log)
         .pipe(gulp.dest('dist/js'));
-});
+    cb();
+}
 
-gulp.task('sass', () => {
+function sassTask(done) {
     gulp.src('src/scss/*.scss')
         .pipe(sass())
         .pipe(gulp.dest('dist/css'));
-});
+    done();
+}
 
-gulp.task('static', () => {
-    gulp.src('src/static/**')
-        .pipe(gulp.dest('dist/'));
-});
+function testTask(done) {
+	let server = new karma.Server({
+		configFile: __dirname + '/karma.conf.js',
+		singleRun: true
+	}, function() {
+		done();
+	});
+	server.start();
+}
 
-gulp.task('build', ['static', 'libs', 'app', 'sass']);
 
-gulp.task('watch', ['build'], () => {
+function watchTask(done) {
     gulp.watch('src/scss/*.scss', ['sass']);
     gulp.watch(['src/**/*.js', 'src/**/*.jsx'], ['app']);
-});
+    done();
+}
 
-gulp.task('test', (done) => {
-    let server = new karma.Server({
-        configFile: __dirname + '/karma.conf.js',
-        singleRun: true
-    }, function() {
-        done();
-    });
-    server.start();
-});
+exports.default = gulp.series(libsTask, appTask, sassTask);
+
+exports.watch = gulp.series(libsTask, appTask, sassTask, watchTask);

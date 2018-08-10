@@ -13,6 +13,12 @@ There are no tests - sorry!
 
 `npm install`
 
-`gulp build`
+`gulp watch`
 
 `node server/index.js`
+
+Then navigate to `http://localhost:3000` which will serve files with `/dist/` as the root, via Express.
+
+The example app will make a call to `/api/example` when the button is clicked - simply to demo a basic end-to-end system working. 
+
+This project is basic, and not complete - it just helps to kick-start React Redux apps using a Node back-end. 

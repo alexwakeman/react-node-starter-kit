@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
         handleDataFetch: (evt) => {
             evt.preventDefault();
             ExampleService.getMessage()
-                .then(() => dispatch(exampleDataAvailable(data)));
+                .then((data) => dispatch(exampleDataAvailable(data)));
         }
     }
 };

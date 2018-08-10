@@ -8,7 +8,7 @@ const appState = (state = initialState, action) => {
         case EXAMPLE_DATA_AVAILABLE:
             newState = {
                 ... state,
-                exampleMessage: data.exampleMessage
+                exampleMessage: action.data.exampleMessage
             };
             break;
         default:
