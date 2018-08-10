@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Simple starter kit for React / Redux and Node / Express.",
   "main": "gulpfile.js",
-  "repository": "https://github.com/alexwakeman/music-of-the-spheres",
+  "repository": "https://github.com/alexwakeman/react-node-starter-kit",
   "dependencies": {
     "babel-register": "^6.24.1",
     "connect-mongodb-session": "^2.0.3",
