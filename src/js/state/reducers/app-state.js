@@ -14,23 +14,17 @@ const appState = (state = initialState, action) => {
         default:
             newState = state;
     }
-    window.sessionStorage.setItem('state', JSON.stringify(newState));
     return newState;
 };
 
 function initAppState() {
-    let initialState = sessionStorage.getItem('state');
     const emptyState = {
         exampleMessage: 'No data loaded, empty state',
     };
 
-    if (!initialState) {
-        initialState = {
-            ...emptyState
-        };
-    } else {
-        initialState = JSON.parse(initialState);
-    }
+    initialState = {
+        ...emptyState
+    };
 
     return initialState;
 }

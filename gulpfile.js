@@ -2,7 +2,6 @@ let gulp = require('gulp');
 let sass = require('gulp-sass');
 let browserify = require('browserify');
 let source = require('vinyl-source-stream');
-let karma = require('karma');
 let gutil = require('gutil');
 let react = require('gulp-react');
 
@@ -33,8 +32,6 @@ gulp.task('libs', function () {
 
     bundler.bundle()
         .pipe(source('libs.js'))
-        // .pipe(buffer())
-        // .pipe(uglify())
         .on('error', gutil.log)
         .pipe(gulp.dest('dist/js'));
 });
@@ -55,14 +52,4 @@ gulp.task('build', ['static', 'libs', 'app', 'sass']);
 gulp.task('watch', ['build'], () => {
     gulp.watch('src/scss/*.scss', ['sass']);
     gulp.watch(['src/**/*.js', 'src/**/*.jsx'], ['app']);
-});
-
-gulp.task('test', (done) => {
-    let server = new karma.Server({
-        configFile: __dirname + '/karma.conf.js',
-        singleRun: true
-    }, function() {
-        done();
-    });
-    server.start();
 });
