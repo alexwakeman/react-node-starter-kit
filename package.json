@@ -6,9 +6,7 @@
   "repository": "https://github.com/alexwakeman/react-node-starter-kit",
   "dependencies": {
     "babel-register": "^6.24.1",
-    "connect-mongodb-session": "^2.0.3",
     "express": "^4.15.2",
-    "express-session": "^1.15.3",
     "hoek": "^4.2.1",
     "path": "^0.12.7",
     "react": "^15.6.0",
@@ -37,7 +35,8 @@
     "starter",
     "kit",
     "react",
-    "node"
+    "node",
+    "boilerplate"
   ],
   "author": "Alex Wakeman",
   "license": "CC-BY-NC-ND-4.0"

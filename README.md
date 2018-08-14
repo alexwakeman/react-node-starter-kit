@@ -11,9 +11,6 @@ There are no tests yet - sorry!
 
 # Usage
 
-Requires MongoDB to be running on your system / server - in order to persist session storage quickly and easily for your users.
-Please install and run Mongo first before proceeding. If you don't need session storage, go ahead and delete this bit in `server/server.js` 
-
 `npm install`
 
 `gulp watch`
